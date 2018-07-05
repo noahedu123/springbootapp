@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * 需求申请表
+ * 需求申请表sun
  */
 @Entity
 @Data
