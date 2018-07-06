@@ -1,4 +1,4 @@
-package com.cn.userenum;
+package com.cn.enums;
 
 import lombok.Getter;
 
