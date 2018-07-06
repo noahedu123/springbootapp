@@ -16,7 +16,7 @@ public class UserLoginDaoTest {
     private UserLoginDao userLoginDao;
     @Test
     public void findByAccName() {
-        UserLoginTbl userLoginTbl=userLoginDao.findByAccName("hyf");
-        Assert.assertNotNull(userLoginTbl);
+        UserLoginTbl userLoginTbl=userLoginDao.findByAccName("hyf1");
+        Assert.assertNull(userLoginTbl);
     }
 }
