@@ -48,8 +48,8 @@ public class UserLoginServiceImpl implements UserLoginService {
                 //解锁时间到达
                 userLoginTbl.setFailureTimes(0);
                 userLoginTbl.setLockTime(null);
-                UserLoginTbl newuser = userLoginDao.save(userLoginTbl);
-                if(newuser == null){
+                UserLoginTbl userLoginTbl1 = userLoginDao.save(userLoginTbl);
+                if(userLoginTbl1 == null){
                     log.error("用户更新失败");
                     throw new Exception(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
                 }
@@ -68,8 +68,8 @@ public class UserLoginServiceImpl implements UserLoginService {
                 }
                 userLoginTbl.setFailureTimes(userLoginTbl.getFailureTimes()+1);
             }
-            UserLoginTbl newuser = userLoginDao.save(userLoginTbl);
-            if(newuser == null){
+            UserLoginTbl userLoginTbl1 = userLoginDao.save(userLoginTbl);
+            if(userLoginTbl1 == null){
                 log.error("用户更新失败");
                 throw new Exception(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
             }
