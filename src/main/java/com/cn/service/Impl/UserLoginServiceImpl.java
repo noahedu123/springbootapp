@@ -64,7 +64,7 @@ public class UserLoginServiceImpl implements UserLoginService {
                     userLoginTbl.setLockTime(date);
                     returncode = UserLoginEnum.LOCK;
                 }else{
-                     returncode = UserLoginEnum.FAIL;
+                    returncode = UserLoginEnum.FAIL;
                 }
                 userLoginTbl.setFailureTimes(userLoginTbl.getFailureTimes()+1);
             }
@@ -76,4 +76,11 @@ public class UserLoginServiceImpl implements UserLoginService {
             return returncode;
         }
     }
+
+    @Override
+    public UserLoginEnum getVerificationCode(String telephone) {
+
+        return null;
+    }
+
 }
