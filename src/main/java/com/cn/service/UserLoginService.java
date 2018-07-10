@@ -1,5 +1,7 @@
 package com.cn.service;
 
+import com.cn.enums.UserLoginEnum;
+
 public interface UserLoginService {
-    String toLogin(String username,String password);
+    UserLoginEnum toLogin(String username, String password);
 }

@@ -1,7 +1,6 @@
 package com.cn.dao;
 
 import com.cn.dataobject.UserLoginTbl;
-import com.cn.enums.UserLoginEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +16,7 @@ public class UserLoginDaoTest {
     private UserLoginDao userLoginDao;
     @Test
     public void findByAccName() {
-        UserLoginTbl userLoginTbl=userLoginDao.findByAccName("aa");
-       // UserLoginTbl userLoginTbl = new UserLoginTbl();
-        userLoginTbl.setAccName("sun");
-        userLoginTbl.setPassword("1235");
-        UserLoginTbl result  = userLoginDao.save(userLoginTbl);
-        Assert.assertNotNull(result);
+        UserLoginTbl userLoginTbl=userLoginDao.findByAccName("hyf1");
+        Assert.assertNull(userLoginTbl);
     }
 }
