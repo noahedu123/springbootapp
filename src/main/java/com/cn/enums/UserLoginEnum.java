@@ -8,11 +8,14 @@ import lombok.Getter;
 @Getter
 public enum UserLoginEnum implements BasicEnum{
 
-    FAIL(000,"用户名或密码错误"),
-    SUCCESS(001,"登录成功"),
+    SUCCESS(000,"成功"),
+    FAIL(001,"用户名或密码错误"),
     REGISTERED(002,"用户未注册"),
     LOCK(003,"用户锁定"),
-    USER_LOGIN_UPDATE_FAIL(004,"用户登录信息更新失败")
+    USER_LOGIN_UPDATE_FAIL(004,"用户登录信息更新失败"),
+    USER_HAS_REGISTER(005,"用户已注册"),
+
+
     ;
     private Integer code;
 

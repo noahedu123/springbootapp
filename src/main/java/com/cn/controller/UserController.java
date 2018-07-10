@@ -6,6 +6,7 @@ import com.cn.Util.ResultUtil;
 import com.cn.enums.ResultStatusCodeEnum;
 import com.cn.enums.UserLoginEnum;
 import com.cn.service.UserLoginService;
+import com.cn.service.UserRegisteService;
 import com.cn.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserLoginService userLoginService;
+    @Autowired
+    private UserRegisteService userRegisteService;
 
     //用户登录
     @PostMapping("/login")
@@ -36,5 +39,17 @@ public class UserController {
                     ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getMessage());
         }
     }
+    //用户注册-手机号验证
+    @PostMapping("/toRegiste")
+    public ResultVo<Object> toRegiste(String telephone){
+        try{
+            UserLoginEnum result = userRegisteService.toRegiste(telephone);
+            return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
+        }catch (Exception e){
+            return ResultUtil.GenerateErrorResult(e.getCode(),
+                    e.getMessage());
+        }
+    }
+
 
 }
