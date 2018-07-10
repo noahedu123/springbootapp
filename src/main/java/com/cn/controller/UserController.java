@@ -1,7 +1,6 @@
 package com.cn.controller;
 
-import com.cn.Exception.Exception;
-import com.cn.Util.EnumUtil;
+import com.cn.Exception.appException;
 import com.cn.Util.ResultUtil;
 import com.cn.enums.ResultStatusCodeEnum;
 import com.cn.enums.UserLoginEnum;
@@ -10,8 +9,6 @@ import com.cn.service.UserRegisteService;
 import com.cn.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +31,7 @@ public class UserController {
         try{
              UserLoginEnum result = userLoginService.toLogin(username,password);
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
-        }catch (Exception e){
+        }catch (appException e){
             return ResultUtil.GenerateErrorResult(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getCode(),
                     ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getMessage());
         }
@@ -45,7 +42,7 @@ public class UserController {
         try{
             UserLoginEnum result = userRegisteService.toRegiste(telephone);
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
-        }catch (Exception e){
+        }catch (appException e){
             return ResultUtil.GenerateErrorResult(e.getCode(),
                     e.getMessage());
         }

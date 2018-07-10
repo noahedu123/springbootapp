@@ -1,6 +1,6 @@
 package com.cn.service.Impl;
 
-import com.cn.Exception.Exception;
+import com.cn.Exception.appException;
 import com.cn.Util.DateUtil;
 import com.cn.dao.UserLoginDao;
 import com.cn.dataobject.UserLoginTbl;
@@ -8,7 +8,6 @@ import com.cn.enums.ResultStatusCodeEnum;
 import com.cn.enums.UserLoginEnum;
 import com.cn.service.UserLoginService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +50,7 @@ public class UserLoginServiceImpl implements UserLoginService {
                 UserLoginTbl userLoginTbl1 = userLoginDao.save(userLoginTbl);
                 if(userLoginTbl1 == null){
                     log.error("用户更新失败");
-                    throw new Exception(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
+                    throw new appException(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
                 }
             }
             //密码验证
@@ -71,7 +70,7 @@ public class UserLoginServiceImpl implements UserLoginService {
             UserLoginTbl userLoginTbl1 = userLoginDao.save(userLoginTbl);
             if(userLoginTbl1 == null){
                 log.error("用户更新失败");
-                throw new Exception(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
+                throw new appException(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
             }
             return returncode;
         }

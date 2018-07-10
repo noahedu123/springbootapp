@@ -7,7 +7,7 @@ import lombok.Getter;
  */
 @Getter
 public enum ResultStatusCodeEnum implements BasicEnum{
-    USER_LOGIN_UPDATE_FAIL(1,"用户登录信息更新失败")
+    USER_LOGIN_UPDATE_FAIL(2001,"用户登录信息更新失败")
     ;
     private String message;
     private Integer code;
