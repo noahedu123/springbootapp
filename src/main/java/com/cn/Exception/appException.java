@@ -4,13 +4,13 @@ import com.cn.enums.ResultStatusCodeEnum;
 import lombok.Getter;
 
 @Getter
-public class Exception extends RuntimeException {
+public class appException extends RuntimeException {
     private Integer code;
-    public Exception(ResultStatusCodeEnum resultStatusCodeEnum){
+    public appException(ResultStatusCodeEnum resultStatusCodeEnum){
         super(resultStatusCodeEnum.getMessage());
         this.code = resultStatusCodeEnum.getCode();
     }
-    public Exception(Integer code,String messsage){
+    public appException(Integer code, String messsage){
         super(messsage);
         this.code = code;
     }

@@ -6,7 +6,7 @@ import com.cn.vo.ResultVo;
 /**
  * 返给前端数据生成数据工具类
  */
-public class ResultUtil {
+public class  ResultUtil {
     /**
      *生成结果成功
      * @param data
