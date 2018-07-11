@@ -32,8 +32,8 @@ public class UserController {
              UserLoginEnum result = userLoginService.toLogin(username,password);
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
         }catch (appException e){
-            return ResultUtil.GenerateErrorResult(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getCode(),
-                    ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getMessage());
+            return ResultUtil.GenerateErrorResult(e.getCode(),
+                    e.getMessage());
         }
     }
     //用户注册-手机号验证
@@ -53,7 +53,7 @@ public class UserController {
         try{
             UserLoginEnum result = userRegisteService.getVerificationCode(telephone);
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
-        }catch (Exception e){
+        }catch (appException e){
             return ResultUtil.GenerateErrorResult(e.getCode(),
                     e.getMessage());
         }
