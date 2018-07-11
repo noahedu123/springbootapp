@@ -52,7 +52,7 @@ public class UserLoginServiceImpl implements UserLoginService {
                 userLoginTbl.setLockTime(null);
                 UserLoginTbl userLoginTbl1 = userLoginDao.save(userLoginTbl);
                 if(userLoginTbl1 == null){
-                    log.error("用户更新失败");
+                    log.error(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getMessage());
                     throw new appException(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
                 }
             }
@@ -72,7 +72,7 @@ public class UserLoginServiceImpl implements UserLoginService {
             }
             UserLoginTbl userLoginTbl1 = userLoginDao.save(userLoginTbl);
             if(userLoginTbl1 == null){
-                log.error("用户更新失败");
+                log.error(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL.getMessage());
                 throw new appException(ResultStatusCodeEnum.USER_LOGIN_UPDATE_FAIL);
             }
             return returncode;
