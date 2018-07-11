@@ -8,3 +8,9 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/feihudui?characterEncoding=utf-8&useSSL=false
+accesskey:
+    accessKeyId: LTAIxr5jsBw2iqBP
+    accessKeySecret: 1BsJEgK0KlrKL4RjoOEbnIRcIpJKLI
+template:
+    templateCode: SMS_139460231
+    signName: 孙穆涛

@@ -14,6 +14,7 @@ public enum UserLoginEnum implements BasicEnum{
     LOCK(003,"用户锁定"),
     USER_LOGIN_UPDATE_FAIL(004,"用户登录信息更新失败"),
     USER_HAS_REGISTER(005,"用户已注册"),
+    USER_SENDMESSAGE_FAIL(006,"验证码发送失败")
 
 
     ;

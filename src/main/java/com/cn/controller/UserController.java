@@ -50,6 +50,17 @@ public class UserController {
                     e.getMessage());
         }
     }
+    //用户注册-发送验证码
+    @PostMapping("/getVerificationCode")
+    public ResultVo<Object> getVerificationCode(String telephone){
+        try{
+            UserLoginEnum result = userRegisteService.getVerificationCode(telephone);
+            return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
+        }catch (Exception e){
+            return ResultUtil.GenerateErrorResult(e.getCode(),
+                    e.getMessage());
+        }
+    }
 
 
 }

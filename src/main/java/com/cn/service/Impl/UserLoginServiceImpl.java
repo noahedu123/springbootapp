@@ -2,6 +2,8 @@ package com.cn.service.Impl;
 
 import com.cn.Exception.Exception;
 import com.cn.Util.DateUtil;
+import com.cn.Util.SmsUtil;
+import com.cn.config.AccessKeyConfig;
 import com.cn.dao.UserLoginDao;
 import com.cn.dataobject.UserLoginTbl;
 import com.cn.enums.ResultStatusCodeEnum;
@@ -20,6 +22,7 @@ import java.util.Date;
 public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     private UserLoginDao userLoginDao;
+
     @Override
     @Transactional
     public UserLoginEnum toLogin(String username, String password) {
@@ -76,11 +79,4 @@ public class UserLoginServiceImpl implements UserLoginService {
             return returncode;
         }
     }
-
-    @Override
-    public UserLoginEnum getVerificationCode(String telephone) {
-
-        return null;
-    }
-
 }
