@@ -58,6 +58,17 @@ public class UserController {
                     e.getMessage());
         }
     }
+    //用户注册-验证码验证
+    @PostMapping("/verifyCode")
+    public ResultVo<Object> verifyCode(String telephone,String code){
+        try{
+            UserLoginEnum result = userRegisteService.verifyCode(telephone,code);
+            return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
+        }catch (appException e){
+            return ResultUtil.GenerateErrorResult(e.getCode(),
+                    e.getMessage());
+        }
+    }
 
 
 }

@@ -5,5 +5,6 @@ import com.cn.enums.UserLoginEnum;
 public interface UserRegisteService {
     UserLoginEnum toRegiste(String telephone);
     UserLoginEnum getVerificationCode(String telephone);
+    UserLoginEnum verifyCode(String telephone,String code);
 
 }

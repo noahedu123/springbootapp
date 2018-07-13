@@ -20,6 +20,5 @@ public class UserVerificationCode {
     private String telephone;
     private String code;
     private Date receiveDate;
-    private String bizid;
 
 }

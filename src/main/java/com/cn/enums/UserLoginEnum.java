@@ -13,7 +13,9 @@ public enum UserLoginEnum implements BasicEnum{
     REGISTERED(1002,"用户未注册"),
     LOCK(1003,"用户锁定"),
     USER_HAS_REGISTER(1005,"用户已注册"),
-    USER_SENDMESSAGE_FAIL(1006,"发送信息失败")
+    VERIFY_CODE_ERROR(1006,"验证码错误"),
+    VERIFY_CODE_TIMEOUT(1007,"验证码超时")
+
 
 
     ;

@@ -1,28 +1,43 @@
 package com.cn.service.Impl;
 
+import com.cn.Util.DateUtil;
 import com.cn.Util.SmsUtil;
 import com.cn.config.AccessKeyConfig;
 import com.cn.config.TemplateConfig;
 import com.cn.dao.UserLoginDao;
+import com.cn.dao.UserVerificationCodeDao;
+import com.cn.dataobject.UserBl;
 import com.cn.dataobject.UserLoginTbl;
 import com.cn.dataobject.UserVerificationCode;
+import com.cn.enums.ResultStatusCodeEnum;
 import com.cn.enums.UserLoginEnum;
 import com.cn.service.UserRegisteService;
-import org.apache.catalina.User;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.cn.Exception.appException;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Service
+@Slf4j
+@Transactional
 public class UserRegisteServiceImpl implements UserRegisteService {
 
     @Autowired
     private UserLoginDao userLoginDao;
     @Autowired
+    private UserVerificationCodeDao userVerificationCodeDao;
+    @Autowired
     AccessKeyConfig accessKeyConfig;
     @Autowired
     TemplateConfig templateConfig;
-    /**
+
+    Date date=new Date();
+    /**;
      * 用户注册——手机号验证
      * @param telephone
      * @return UserLoginEnum
@@ -40,25 +55,77 @@ public class UserRegisteServiceImpl implements UserRegisteService {
        }
     }
 
+    /**
+     * 用户注册——获取验证码
+     * @param telephone
+     * @return 返回获取验证码成功或失败
+     */
     @Override
     public UserLoginEnum getVerificationCode(String telephone) {
-        //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-//        request.setTemplateParam("{\"name\":\"Tom\", \"code\":\"123\"}");
-
-         String sendCode =(int)((Math.random()*9+1)*100000)+"";
-        String templateParam="{\"code\":sendCode}";
+        /**
+         * 1.生成验证码
+         * 2.调用接口发送验证码
+         * 3.将验证码保存到数据库
+         */
+        String sendCode =(int)((Math.random()*9+1)*100000)+"";
+        String templateParam="{\"code\":"+sendCode+"}";
         try{
-
-            SendSmsResponse response =  SmsUtil.sendSms(accessKeyConfig.getAccessKeyId(),accessKeyConfig.getAccessKeySecret(), telephone,templateConfig.getSignName(),templateConfig.getTemplateCode(),templateParam);
-            UserVerificationCode userVerificationCode=new UserVerificationCode();
-            userVerificationCode.setBizid(response.getBizId());
-            userVerificationCode.setTelephone(telephone);
-
-        }catch (Exception e){
-            return UserLoginEnum.USER_SENDMESSAGE_FAIL;
+            //调用接口发送验证码
+            SendSmsResponse response = SmsUtil.sendSms(accessKeyConfig.getAccessKeyId(),accessKeyConfig.getAccessKeySecret(),
+                    telephone,templateConfig.getSignName(),templateConfig.getTemplateCode(),templateParam);
+            if(response.getCode().equals("OK")){//验证码发送返回结果OK
+                UserVerificationCode userVerificationCode = new UserVerificationCode();
+                userVerificationCode.setTelephone(telephone);
+                userVerificationCode.setCode(sendCode);
+                UserVerificationCode userVerificationCode1 = userVerificationCodeDao.save(userVerificationCode);
+                if(userVerificationCode1 == null){//验证码保存失败
+                    log.error(ResultStatusCodeEnum.USER_VERIFICATION_UPDATE_FAIL.getMessage());
+                   throw new appException(ResultStatusCodeEnum.USER_VERIFICATION_UPDATE_FAIL);
+                }
+            }else{
+                log.error(response.getCode());
+                throw new appException(ResultStatusCodeEnum.USER_SENDMESSAGE_FAIL);
+            }
+        }catch (Exception e){//发送短信异常
+            log.error(ResultStatusCodeEnum.USER_SENDMESSAGE_FAIL.getMessage());
+            throw new appException(ResultStatusCodeEnum.USER_SENDMESSAGE_FAIL);
         }
 
         return UserLoginEnum.SUCCESS;
+    }
+
+    /**
+     * 验证 手机验证码
+     * @param telephone
+     * @param code
+     * @return UserLoginEnum.SUCCESS
+     */
+    @Override
+    public UserLoginEnum verifyCode(String telephone, String code) {
+        UserVerificationCode userVerificationCode = userVerificationCodeDao.findUserVerificationCodeByTelephone(telephone);
+        /**
+         * -->验证码是否存在
+         *  1.1 验证码存在 -->是否超时
+         *     1.1.1 不超时  --> 验证码是否正确
+         *          1.1.1.1 正确 删除此条记录 返回成功
+         *         1.1.1.2 错误 返回验证码错误信息
+         *     1.1.2  超时  返回用户超时信息
+         *  1.2 验证不存在（可能被删除掉） 返回用户超时信息
+         */
+        if(userVerificationCode!=null  ){//验证码存在
+            if(DateUtil.hourMinutes(5).before(userVerificationCode.getReceiveDate())){//验证码不超时
+                if(userVerificationCode.getCode().equals(code)){ //验证码正确
+                    userVerificationCodeDao.deleteById(telephone);
+                    return UserLoginEnum.SUCCESS;
+                }else{ //验证码错误
+                    return UserLoginEnum.VERIFY_CODE_ERROR;
+                }
+            }else{ //验证超时
+                return  UserLoginEnum.VERIFY_CODE_TIMEOUT;
+            }
+        }else{
+            return UserLoginEnum.VERIFY_CODE_TIMEOUT;
+        }
     }
 
 
