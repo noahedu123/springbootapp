@@ -20,7 +20,6 @@ public class UserVerificationCodeDaoTest {
         UserVerificationCode userVerificationCode=new UserVerificationCode();
         userVerificationCode.setTelephone("15033801317");
         userVerificationCode.setCode("=81D238");
-        userVerificationCode.setBizid("21432R345");
         UserVerificationCode userVerificationCode1= userVerificationCodeDao.save(userVerificationCode);
         Assert.assertNotNull(userVerificationCode1);
     }
