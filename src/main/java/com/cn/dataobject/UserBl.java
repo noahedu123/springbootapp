@@ -3,6 +3,8 @@ package com.cn.dataobject;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class UserBl {
      *用户ID（user_login_tbl表主键）
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /**
      *用户昵称
@@ -44,7 +47,7 @@ public class UserBl {
     /**
      *密码（加密后的字符串）
      */
-    private String passWord;
+    private String password;
     /**
      *注册时间
      */
@@ -65,5 +68,8 @@ public class UserBl {
      *有效期结束时间
      */
     private Date membershipEnd;
-
+    /**
+     * 手机号码
+     */
+    private String telephone;
 }

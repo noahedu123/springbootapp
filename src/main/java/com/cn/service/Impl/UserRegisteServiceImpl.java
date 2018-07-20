@@ -4,6 +4,8 @@ import com.cn.Util.DateUtil;
 import com.cn.Util.SmsUtil;
 import com.cn.config.AccessKeyConfig;
 import com.cn.config.TemplateConfig;
+import com.cn.constant.VerifyCodeConstant;
+import com.cn.dao.UserBlDao;
 import com.cn.dao.UserLoginDao;
 import com.cn.dao.UserVerificationCodeDao;
 import com.cn.dataobject.UserBl;
@@ -28,13 +30,13 @@ import java.util.Date;
 public class UserRegisteServiceImpl implements UserRegisteService {
 
     @Autowired
-    private UserLoginDao userLoginDao;
-    @Autowired
     private UserVerificationCodeDao userVerificationCodeDao;
     @Autowired
     AccessKeyConfig accessKeyConfig;
     @Autowired
     TemplateConfig templateConfig;
+    @Autowired
+    private UserBlDao userBlDao;
 
     Date date=new Date();
     /**;
@@ -44,11 +46,11 @@ public class UserRegisteServiceImpl implements UserRegisteService {
      */
     @Override
     public UserLoginEnum toRegiste(String telephone) {
-       UserLoginTbl userLoginTbl= userLoginDao.findByAccName(telephone);
+       UserBl userBl = userBlDao.findUserBlByTelephone(telephone);
         /**
          * 不存在返回用户未注册，否则返回已注册
          */
-       if(userLoginTbl==null){
+       if(userBl==null){
            return UserLoginEnum.REGISTERED;
        }else{
            return UserLoginEnum.USER_HAS_REGISTER;
@@ -113,7 +115,7 @@ public class UserRegisteServiceImpl implements UserRegisteService {
          *  1.2 验证不存在（可能被删除掉） 返回用户超时信息
          */
         if(userVerificationCode!=null  ){//验证码存在
-            if(DateUtil.hourMinutes(5).before(userVerificationCode.getReceiveDate())){//验证码不超时
+            if(DateUtil.hourMinutes(VerifyCodeConstant.EXPIRE).before(userVerificationCode.getReceiveDate())){//验证码不超时
                 if(userVerificationCode.getCode().equals(code)){ //验证码正确
                     userVerificationCodeDao.deleteById(telephone);
                     return UserLoginEnum.SUCCESS;
@@ -128,5 +130,18 @@ public class UserRegisteServiceImpl implements UserRegisteService {
         }
     }
 
-
+    /**
+     * 保存用户信息
+     * @param userBl
+     * @return UserLoginEnum.SUCCESS
+     */
+    @Override
+    public UserLoginEnum saveInfo(UserBl userBl) {
+        UserBl userBl1 = userBlDao.save(userBl);
+        if(userBl1 == null){
+            log.error(ResultStatusCodeEnum.USERBL_SAVE_FAIL.getMessage());
+            throw new appException(ResultStatusCodeEnum.USERBL_SAVE_FAIL);
+        }
+        return UserLoginEnum.SUCCESS;
+    }
 }

@@ -25,11 +25,6 @@ public class UserLoginTbl {
      *用户名（手机号作为登录唯一标识）
      */
     private String accName;
-
-    /**
-     *密码（加密后的字符串）
-     */
-    private String password;
     /**
      * 登录失败次数
      */
