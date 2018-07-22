@@ -51,8 +51,9 @@ public class PersonalSettingsController {
     @PostMapping("/saveAvatar")
     public ResultVo<Object> saveAvatar(@RequestParam("file")MultipartFile file,
                                  @RequestParam("telephone") String telephone){
-        UserLoginEnum result = personalSettingsService.changeAvatar(telephone,file);
-        return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
+        String result = personalSettingsService.changeAvatar(telephone,file);
+        return ResultUtil.GenerateSuccessResult(UserLoginEnum.SUCCESS.getCode(),
+                UserLoginEnum.SUCCESS.getMessage(),result);
     }
 
     /**
@@ -63,9 +64,10 @@ public class PersonalSettingsController {
      */
     @PostMapping("/changeTelephone")
     public ResultVo<Object> changeTelephone(@RequestParam("oldTelephone")String oldTelephone,
-                                 @RequestParam("newTelephone") String newTelephone){
+                                            @RequestParam("newTelephone") String newTelephone){
         UserLoginEnum result = personalSettingsService.changeTelephone(oldTelephone,newTelephone);
         return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
     }
+
 
 }
