@@ -40,11 +40,11 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
      * 用户更换头像
      * @param telephone
      * @param file
-     * @return UserLoginEnum
+     * @return 用户头像保存路径
      */
     @Override
     @Transactional
-    public UserLoginEnum changeAvatar(String telephone, MultipartFile file) {
+    public String changeAvatar(String telephone, MultipartFile file) {
         /**
          * 1.查询userbl用户相关信息 -->判断用户是否存在
          *      1.1 不存在 异常
@@ -53,7 +53,7 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
          *      1.3 创建文件
          *      1.4 更新用户信息 -->判断是否成功
          *          1.4.1 失败  抛异常
-         *          1.4.2 成功 返回成功信息
+         *          1.4.2 成功 返回用户头像路径
          */
         UserBl userBl = userBlDao.findUserBlByTelephone(telephone);
         if(userBl == null){
@@ -81,7 +81,7 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
             if(userLoginEnum == null){
                 throw new appException(ResultStatusCodeEnum.USERBL_SAVE_FAIL);
             }
-            return UserLoginEnum.SUCCESS;
+            return imageLocationConfig.getLocation().concat("/").concat(avatar);
         }catch (Exception e){
             throw new appException(ResultStatusCodeEnum.UPLOAD_IMAGES_FAIL);
         }
