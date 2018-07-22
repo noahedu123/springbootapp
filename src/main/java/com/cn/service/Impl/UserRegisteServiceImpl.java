@@ -137,6 +137,7 @@ public class UserRegisteServiceImpl implements UserRegisteService {
      */
     @Override
     public UserLoginEnum saveInfo(UserBl userBl) {
+        userBl.setBindtime(new Date());
         UserBl userBl1 = userBlDao.save(userBl);
         if(userBl1 == null){
             log.error(ResultStatusCodeEnum.USERBL_SAVE_FAIL.getMessage());

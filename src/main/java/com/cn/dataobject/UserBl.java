@@ -72,4 +72,8 @@ public class UserBl {
      * 手机号码
      */
     private String telephone;
+    /**
+     * 手机号码绑定时间
+     */
+    private Date bindtime;
 }

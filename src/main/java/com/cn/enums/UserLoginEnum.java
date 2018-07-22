@@ -15,6 +15,7 @@ public enum UserLoginEnum implements BasicEnum{
     USER_HAS_REGISTER(1005,"用户已注册"),
     VERIFY_CODE_ERROR(1006,"验证码错误"),
     VERIFY_CODE_TIMEOUT(1007,"验证码超时"),
+    TELEPHONE_CHANGE_NOT_ALLOW(1008,"手机号30天内不能改")
 
 
 

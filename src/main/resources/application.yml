@@ -14,3 +14,5 @@ accesskey:
 template:
     templateCode: SMS_139460231
     signName: 孙穆涛
+img:
+    location: static/images/
