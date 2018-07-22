@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
  */
 public class FileUtil {
     public static String createImageUrl(String url) throws  Exception{
-        File path = new File(ResourceUtils.getURL("classpath:").getPath());
+        File path = new File(ResourceUtils.getURL("classpath:static/").getPath());
         if(!path.exists()) path = new File("");
         File upload = new File(path.getAbsolutePath(),url);
         if(!upload.exists()) upload.mkdirs();

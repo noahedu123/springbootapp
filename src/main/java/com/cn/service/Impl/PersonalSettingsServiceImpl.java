@@ -81,7 +81,7 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
             if(userLoginEnum == null){
                 throw new appException(ResultStatusCodeEnum.USERBL_SAVE_FAIL);
             }
-            return imageLocationConfig.getLocation().concat("/").concat(avatar);
+            return imageLocationConfig.getLocation().concat(avatar);
         }catch (Exception e){
             throw new appException(ResultStatusCodeEnum.UPLOAD_IMAGES_FAIL);
         }
