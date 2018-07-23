@@ -3,7 +3,6 @@ package com.cn.Util;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 /**
  * 创建存放头像路径文件classpath:static/images/
