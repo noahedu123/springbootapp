@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.jnlp.PersistenceService;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
@@ -83,6 +82,7 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
             }
             return imageLocationConfig.getLocation().concat(avatar);
         }catch (Exception e){
+            log.error(e.getMessage());
             throw new appException(ResultStatusCodeEnum.UPLOAD_IMAGES_FAIL);
         }
     }
