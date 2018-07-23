@@ -3,6 +3,8 @@ package com.cn.controller;
 
 import com.cn.Util.ResultUtil;
 
+import com.cn.dao.UserBlDao;
+import com.cn.dataobject.UserBl;
 import com.cn.enums.UserLoginEnum;
 import com.cn.service.PersonalSettingsService;
 import com.cn.vo.ResultVo;
@@ -22,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class PersonalSettingsController {
     @Autowired
     private PersonalSettingsService personalSettingsService;
+    @Autowired
+    private UserBlDao userBlDao;
 
     /**
      * 保存用户头像
@@ -48,6 +52,36 @@ public class PersonalSettingsController {
                                             @RequestParam("newTelephone") String newTelephone){
         UserLoginEnum result = personalSettingsService.changeTelephone(oldTelephone,newTelephone);
         return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
+    }
+
+    /**
+     * 用户更换昵称，密码
+     * @param telephone
+     * @param nick
+     * @param password
+     * @return
+     */
+    @PostMapping("/updateSettings")
+    public ResultVo<Object> changeTelephone(@RequestParam("telephone")String telephone,
+                                            @RequestParam(value = "nick",required = false) String nick,
+                                            @RequestParam(value = "password",required = false) String password){
+
+        UserLoginEnum result = personalSettingsService.updateSettings(telephone,nick,password);
+        return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
+    }
+
+    /**
+     * 查询用户基本信息
+     * @param telephone
+     * @return
+     */
+    @PostMapping("/query")
+    public ResultVo<Object> query(@RequestParam("telephone")String telephone){
+        UserBl userbl = userBlDao.findUserBlByTelephone(telephone);
+        if(userbl == null){
+            return  ResultUtil.GenerateSuccessResult(UserLoginEnum.REGISTERED.getCode(),UserLoginEnum.REGISTERED.getMessage(),null);
+        }
+        return ResultUtil.GenerateSuccessResult(UserLoginEnum.SUCCESS.getCode(),UserLoginEnum.SUCCESS.getMessage(),userbl);
     }
 
 
