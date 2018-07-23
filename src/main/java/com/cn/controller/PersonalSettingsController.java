@@ -1,17 +1,20 @@
 package com.cn.controller;
 
+
 import com.cn.Util.ResultUtil;
+
 import com.cn.enums.UserLoginEnum;
 import com.cn.service.PersonalSettingsService;
 import com.cn.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 
 @RestController
 @RequestMapping("/PersonalSetting")
@@ -45,12 +48,6 @@ public class PersonalSettingsController {
                                             @RequestParam("newTelephone") String newTelephone){
         UserLoginEnum result = personalSettingsService.changeTelephone(oldTelephone,newTelephone);
         return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
-    }
-    @PostMapping("/updateSettings")
-    public ResultVo<Object> updateSettings(@RequestParam("telephone")String telephone,
-                                           @RequestParam(value = "password",required = false)String password,
-                                           @RequestParam(value = "nick",required = false)String nick){
-        return null;
     }
 
 
