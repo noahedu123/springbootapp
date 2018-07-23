@@ -56,7 +56,7 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
         }
         try {
             if (!StringUtils.isEmpty(userBl.getAvatar())) {
-                //获取用户原先头像存放路径 /data/resource/www/image/83729343473.img 删除文件
+                //获取用户原先 头像存放路径 /data/resource/www/image/83729343473.img 删除文件
                 HttpUtil.sftpFileDelete(httpConfig.getIp(),httpConfig.getPort(),httpConfig.getUsername(),httpConfig.getPsw(),
                         httpConfig.getFilehome().concat(httpConfig.getAccesspath()),userBl.getAvatar());
             }

@@ -2,8 +2,6 @@ server:
   port: 8001
   servlet:
     context-path: /feihudui
-web:
-  upload-path : D:/temp/images/
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -19,6 +17,13 @@ accesskey:
 template:
     templateCode: SMS_139460231
     signName: 孙穆涛
-img:
-    location: static/image/
+httpserver:
+    ip: 118.89.248.60
+    username: root
+    psw: wei19730516
+    port: 22
+    filehome: /data/resource
+    accesspath: /www/images
+    httpport: 11080
+
 
