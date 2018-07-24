@@ -1,6 +1,5 @@
 package com.cn.controller;
 
-import com.cn.Exception.appException;
 import com.cn.Util.ResultUtil;
 import com.cn.dataobject.UserBl;
 import com.cn.enums.ResultStatusCodeEnum;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.xml.transform.Result;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestParam;
 /**

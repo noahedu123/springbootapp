@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import com.cn.enums.ResultStatusCodeEnum;
-import java.util.List;
 @Slf4j
 @Component
 public class UserLoginInfoClearSchedule {
