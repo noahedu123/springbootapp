@@ -1,8 +1,12 @@
 package com.cn.dataobject;
 
+import com.cn.enums.ApplyAuditStatusEnum;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -16,6 +20,7 @@ public class ApplyTbl {
      * id
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /**
      *用户id
@@ -28,7 +33,7 @@ public class ApplyTbl {
     /**
      *身份证号码
      */
-    private String idCard;
+    private String idcard;
     /**
      *手机号
      */
@@ -56,7 +61,7 @@ public class ApplyTbl {
     /**
      *审核状态
      */
-    private Integer status;
+    private Integer status = ApplyAuditStatusEnum.NOAUDIT.getCode();
     /**
      *需求详情
      */

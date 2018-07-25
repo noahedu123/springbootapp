@@ -1,5 +1,6 @@
 package com.cn.dataobject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -47,6 +48,7 @@ public class UserBl {
     /**
      *密码（加密后的字符串）
      */
+    @JsonIgnore
     private String password;
     /**
      *注册时间
