@@ -10,7 +10,6 @@ public class ApplyAppointmentForm {
     /**
      *用户id
      */
-    @NotEmpty(message = "用户id不能为空")
     private Integer userId;
     /**
      *姓名
@@ -21,7 +20,7 @@ public class ApplyAppointmentForm {
      *身份证号码
      */
     @NotEmpty(message = "身份证号不能为空")
-    private String idCard;
+    private String idcard;
     /**
      *手机号
      */

@@ -14,7 +14,8 @@ public enum ResultStatusCodeEnum implements BasicEnum{
     SCHEDULE_DELETE_USER_LOGIN_FAIL(2004,"定时删除用户登录信息失败"),
     USERBL_SAVE_FAIL(2005,"用户基本信息保存失败"),
     PARAM_ERROR(2006,"入参错误"),
-    UPLOAD_IMAGES_FAIL(2007,"上次头像失败")
+    UPLOAD_IMAGES_FAIL(2007,"上传头像失败"),
+    APPLY_SAVE_FAIL(2008,"需求申请保存失败")
     ;
     private String message;
     private Integer code;

@@ -30,8 +30,12 @@ public class UserController {
     private UserLoginService userLoginService;
     @Autowired
     private UserRegisteService userRegisteService;
-
-    //用户登录
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @return
+     */
     @PostMapping("/login")
     public ResultVo<Object> Login(@RequestParam("username") String username,
                                   @RequestParam("password") String password){
@@ -39,21 +43,34 @@ public class UserController {
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
 
     }
-    //用户注册-手机号验证
+    /**
+     * 用户注册-手机号验证
+     * @param telephone
+     * @return
+     */
     @PostMapping("/toRegiste")
     public ResultVo<Object> toRegiste(@RequestParam("telephone") String telephone){
             UserLoginEnum result = userRegisteService.toRegiste(telephone);
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
 
     }
-    //用户注册-发送验证码
+    /**
+     * 用户注册-发送验证码
+     * @param telephone
+     * @return
+     */
     @PostMapping("/getVerificationCode")
     public ResultVo<Object> getVerificationCode(@RequestParam("telephone") String telephone){
             UserLoginEnum result = userRegisteService.getVerificationCode(telephone);
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
 
     }
-    //用户注册-验证码验证
+    /**
+     * 用户注册-验证码验证
+     * @param telephone
+     * @param code
+     * @return
+     */
     @PostMapping("/verifyCode")
     public ResultVo<Object> verifyCode(@RequestParam("telephone") String telephone,
                                        @RequestParam("code") String code){
@@ -61,7 +78,12 @@ public class UserController {
             return ResultUtil.GenerateSuccessResult(result.getCode(),result.getMessage(),null);
 
     }
-    //用户注册-保存基本信息
+    /**
+     * 用户注册-保存基本信息
+     * @param userInfo
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/save")
     public ResultVo<Object> saveUserInfo(@Valid UserRegisteInfoForm userInfo,
                                          BindingResult bindingResult){

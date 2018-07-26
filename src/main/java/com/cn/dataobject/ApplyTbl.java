@@ -73,7 +73,7 @@ public class ApplyTbl {
     /**
      *操作时间
      */
-    private Date update;
+    private Date updatetime;
 
 
 }
