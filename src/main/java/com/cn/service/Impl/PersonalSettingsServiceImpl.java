@@ -95,14 +95,14 @@ public class PersonalSettingsServiceImpl implements PersonalSettingsService {
     public UserLoginEnum changeTelephone(String oldtelephone, String newtelephone) {
         /**
          * 1.查询用户信息 -->判断是否为空
-         *   1.1 空 -->抛出异常
+         *   1.1 空 返回用户未注册
          *   1.2 不空 --> 判断用户是否可以更改手机号（30内不许更换）
          *          1.2.1 可以 --> 更新用户信息
          *          1.2.2 不可以 返回用户手机号30天内不能改
          */
         UserBl userbl = userBlDao.findUserBlByTelephone(oldtelephone);
         if(userbl == null){
-            throw  new appException(ResultStatusCodeEnum.USERBL_SAVE_FAIL);
+            return UserLoginEnum.REGISTERED;
         }else{
             Date date = new Date();
             //判断用户bindtime绑定手机号时间是否超过30天

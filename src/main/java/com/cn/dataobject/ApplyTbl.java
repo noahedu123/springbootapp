@@ -2,7 +2,6 @@ package com.cn.dataobject;
 
 import com.cn.enums.ApplyAuditStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,7 +52,7 @@ public class ApplyTbl {
     /**
      *提交类型
      */
-    private Integer type;
+    private String type;
     /**
      *申请时间
      */

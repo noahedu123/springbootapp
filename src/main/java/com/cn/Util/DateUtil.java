@@ -24,5 +24,14 @@ public class DateUtil {
         now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
         return now.getTime();
     }
-
+    /**
+     * 得到几年后的时间
+     * @param year
+     * @return
+     */
+    public static Date getDateAfterYear(int year) {
+        Calendar curr = Calendar.getInstance();
+        curr.set(Calendar.YEAR,curr.get(Calendar.YEAR)+year);
+        return  curr.getTime();
+    }
     }

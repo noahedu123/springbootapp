@@ -3,7 +3,6 @@ package com.cn.form;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Date;
 
 @Data
 public class ApplyAppointmentForm {
@@ -40,7 +39,7 @@ public class ApplyAppointmentForm {
     /**
      *提交类型
      */
-    private Integer type;
+    private String type;
     /**
      *需求详情
      */
