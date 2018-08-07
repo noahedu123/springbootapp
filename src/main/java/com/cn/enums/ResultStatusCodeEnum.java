@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public enum ResultStatusCodeEnum implements BasicEnum{
     USER_LOGIN_UPDATE_FAIL(2001,"用户登录信息更新失败"),
-    USER_VERIFICATION_UPDATE_FAIL(2001,"验证码更新失败"),
-    USER_SENDMESSAGE_FAIL(2003,"发送信息失败"),
+    USER_VERIFICATION_UPDATE_FAIL(2001,"验证码保存失败"),
+    USER_SENDMESSAGE_FAIL(2003,"发送验证码失败"),
     SCHEDULE_DELETE_VERIFYCODE_FAIL(2004,"定时删除无效验证码失败"),
     SCHEDULE_DELETE_USER_LOGIN_FAIL(2004,"定时删除用户登录信息失败"),
     USERBL_SAVE_FAIL(2005,"用户基本信息保存失败"),

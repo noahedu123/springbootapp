@@ -3,6 +3,7 @@ package com.cn.controller;
 
 import com.cn.Util.ResultUtil;
 
+import com.cn.config.HttpServerConfig;
 import com.cn.dao.UserBlDao;
 import com.cn.dataobject.UserBl;
 import com.cn.enums.UserLoginEnum;
@@ -13,6 +14,7 @@ import com.cn.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,8 @@ public class PersonalSettingsController {
     private PersonalSettingsService personalSettingsService;
     @Autowired
     private UserBlDao userBlDao;
+    @Autowired
+    private HttpServerConfig httpConfig;
 
     /**
      * 保存用户头像
@@ -79,6 +83,12 @@ public class PersonalSettingsController {
     @PostMapping("/query")
     public ResultVo<Object> query(@RequestParam("telephone")String telephone){
         UserBl userbl = userBlDao.findUserBlByTelephone(telephone);
+        //判断如果头像不为空的话 返回头像存储全路径
+        if(!StringUtils.isEmpty(userbl.getAvatar())){
+            String avatarUrl=("http://").concat(httpConfig.getIp()).concat(":")+httpConfig.getHttpport()
+                                +httpConfig.getAccesspath().concat("/").concat(userbl.getAvatar());
+            userbl.setAvatar(avatarUrl);
+        }
         if(userbl == null){
             return  ResultUtil.GenerateSuccessResult(UserLoginEnum.REGISTERED.getCode(),UserLoginEnum.REGISTERED.getMessage(),null);
         }
