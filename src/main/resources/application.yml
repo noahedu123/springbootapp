@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8005
   servlet:
     context-path: /feihudui
 spring:
@@ -24,6 +24,6 @@ httpserver:
     port: 22
     filehome: /data/resource
     accesspath: /www/images
-    httpport: 11080
+    httpport: 80
 
 
