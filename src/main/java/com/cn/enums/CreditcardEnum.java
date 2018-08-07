@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public enum CreditcardEnum implements BasicEnum{
 
-    SUCCESS(3000,"成功"),
+    SUCCESS(3000,"申请提交成功"),
     FAIL(3001,"申请失败")
     ;
     private Integer code;
